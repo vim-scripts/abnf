@@ -1,8 +1,8 @@
 " Vim syntax file
 " Language: ABNF
 " Maintainer: Matthew L Daniel <mdaniel@gmail.com>
-" Last Change: 2006-06-04
-" Version: 1.0.0
+" Last Change: 2006-06-06
+" Version: 1.0.1
 " Based On: BNF (by Michael Brailsford)
 
 " Quit when a syntax file was already loaded
@@ -16,6 +16,9 @@ setlocal iskeyword+=-
 syn case ignore
 setlocal ignorecase
 
+" Abnf does not allow comments wherever you please - they are considered
+" whitespace and whitespace may only appear in designated locations
+syn match abnfNonRuleComment /^;.*$/
 syn match abnfComment /;.*$/ contained
 " Without the "contained", this doesn't show up :-(
 syn keyword abnfCoreRules contained
@@ -40,6 +43,20 @@ syn match abnfTerminalChar contained
             \ /%[bdx][[:xdigit:]]\+\%(\.[[:xdigit:]]\+\)*\%(-[[:xdigit:]]\+\)\?/
 
 syn region abnfBlock start=/^\zs\a\+/ end=/^$/ contains=CONTAINED
+
+if !exists('abnf_ignore_whitespace')
+" is there a way to make the match work in both contexts?
+    syn match abnfIncompleteStatement /^\s\+$/ contained
+    syn match abnfWhiteError /^\s\+$/
+endif
+
+if exists('abnf_strict')
+  hi def link abnfNonRuleComment Error
+endif
+if !exists('abnf_ignore_whitespace')
+    hi def link abnfIncompleteStatement Error
+    hi def link abnfWhiteError Error
+endif
 
 hi def link abnfBlock Statement
 hi def link abnfComment Comment 
