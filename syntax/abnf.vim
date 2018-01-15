@@ -24,6 +24,17 @@ syn match abnfComment /;.*$/ contained
 syn keyword abnfCoreRules contained
             \ ALPHA BIT CHAR CR CRLF CTL DIGIT DQUOTE HEXDIG 
             \ HTAB LF LWSP OCTET SP VCHAR WSP 
+            \ UNICODE BEYONDASCII BEYONDG0
+            \ C1 BEYONDC1 BEYONDG1 LATIN1 BEYONDLATIN1
+            \ NONUCHAR UCHAR UCHARBEYONDBMP UCHARBEYONDLATIN1
+            \ UCHARBEYONDC1 UCHARBEYONDASCII
+            \ PPUACHAR SPUAACHAR SPUABCHAR PUACHAR
+            \ UVCHARBEYONDBMP UVCHARBEYONDLATIN1
+            \ UVCHARBEYONDASCII UVCHARBEYONDC1 UVCHAR
+            \ UWSPBEYONDASCII UWSP PAD HOP BPH NBH IND 
+            \ NEL SSA ESA HTS HTJ VTS PLD PLU RI SS2 SS3
+            \ DCS PU1 PU2 STS CCH MW SPA EPA SOS SGCI SCI CSI
+            \ ST OSC PM APC NBSP SHY LS PS
 syn match abnfQuotedRuleName /<[^<>]*>/ contained
 syn match abnfRepeat /[[:digit:]]\|\%([[:digit:]]*\*[[:digit:]]*\)/ contained
 syn match abnfRuleName /[[:alpha:]][-[:alnum:]]*/ contained
